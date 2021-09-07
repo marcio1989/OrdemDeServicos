@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcio.os.domain.Tecnico;
+import com.marcio.os.dtos.TecnicoDTO;
 import com.marcio.os.repositories.TecnicoRepository;
 import com.marcio.os.services.exceptions.ObjectNotFoundException;
 
@@ -26,5 +27,8 @@ public class TecnicoService {
 	//retornando uma lista de tecnicos
 	public List<Tecnico> findAll() {
 		return repository.findAll();
+	}
+	public Tecnico create(TecnicoDTO objDTO) {
+		return repository.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
 	}
 }
