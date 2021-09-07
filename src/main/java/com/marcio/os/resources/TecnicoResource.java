@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.marcio.os.domain.Tecnico;
 import com.marcio.os.dtos.TecnicoDTO;
 import com.marcio.os.services.TecnicoService;
 
