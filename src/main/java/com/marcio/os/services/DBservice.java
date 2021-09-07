@@ -3,7 +3,6 @@ package com.marcio.os.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import com.marcio.os.domain.Cliente;
@@ -16,7 +15,7 @@ import com.marcio.os.repositories.OSRepository;
 import com.marcio.os.repositories.TecnicoRepository;
 
 @Service
-public class DBservice {
+public class DBService {
 	
 	@Autowired
 	private TecnicoRepository tecnicoRepository;
