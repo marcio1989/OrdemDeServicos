@@ -1,18 +1,17 @@
 package com.marcio.os.services.exceptions;
 
-public class ObjectNotFoundException extends RuntimeException{
+public class DataIntegratyViolationException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 
-	public ObjectNotFoundException(String message, Throwable cause) {
+	public DataIntegratyViolationException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public ObjectNotFoundException(String message) {
+	public DataIntegratyViolationException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-		
-	
+
 }
