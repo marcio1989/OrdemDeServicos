@@ -9,41 +9,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.marcio.os.domain.Pessoa;
-import com.marcio.os.domain.Tecnico;
-import com.marcio.os.dtos.TecnicoDTO;
+import com.marcio.os.domain.Cliente;
+import com.marcio.os.dtos.ClienteDTO;
 import com.marcio.os.repositories.PessoaRepository;
-import com.marcio.os.repositories.TecnicoRepository;
+import com.marcio.os.repositories.ClienteRepository;
 import com.marcio.os.services.exceptions.DataIntegratyViolationException;
 import com.marcio.os.services.exceptions.ObjectNotFoundException;
 
 @Service
-public class TecnicoService {
+public class ClienteService {
 	
 	@Autowired
-	private TecnicoRepository repository;
+	private ClienteRepository repository;
 	
 	@Autowired
 	private PessoaRepository pessoaRepository;
 	
-	public Tecnico findById(Integer id) {
-		Optional<Tecnico> obj = repository.findById(id);
+	public Cliente findById(Integer id) {
+		Optional<Cliente> obj = repository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
-				"Objeto não encontrado! Id: " + id + ", Tipo: " + Tecnico.class.getName()));
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
 	}
 
-	public List<Tecnico> findAll() {
+	public List<Cliente> findAll() {
 		return repository.findAll();
 	}
 	
-	public Tecnico create(TecnicoDTO objDTO) {
+	public Cliente create(ClienteDTO objDTO) {
 	if(findByCPF(objDTO) != null) {
 		throw new DataIntegratyViolationException("CPF já cadastrado!");
 	}
 	
-	return repository.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
+	return repository.save(new Cliente(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
 	}
-	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
-		Tecnico oldObj = findById(id);
+	public Cliente update(Integer id, @Valid ClienteDTO objDTO) {
+		Cliente oldObj = findById(id);
 		
 		if(findByCPF(objDTO) != null && findByCPF(objDTO).getId() != id) {
 			throw new DataIntegratyViolationException("CPF já cadastrado!");
@@ -54,22 +54,19 @@ public class TecnicoService {
 		return repository.save(oldObj);
 	}
 	public void delete(Integer id) {
-		Tecnico obj = findById(id);
+		Cliente obj = findById(id);
 		
 		if(obj.getList().size() > 0) {
-			throw new DataIntegratyViolationException("Técnico possui ordem de servico, não pode ser deletado!");
+			throw new DataIntegratyViolationException("Pessoa possui ordem de servico, não pode ser deletado!");
 		}
 		repository.deleteById(id);
 	}
 	
-	private Pessoa findByCPF(TecnicoDTO objDto) {
+	private Pessoa findByCPF(ClienteDTO objDto) {
 		Pessoa obj = pessoaRepository.findByCPF(objDto.getCpf());
 		if(obj != null) {
 			return obj;
 		}
 		return null; 
 	}
-
-	
-
 }
